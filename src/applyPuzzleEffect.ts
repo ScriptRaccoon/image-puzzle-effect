@@ -1,8 +1,8 @@
 export function applyPuzzleEffect(
 	container: HTMLElement,
 	options: {
-		x: number;
-		y: number;
+		columns: number;
+		rows: number;
 		speed: number;
 		delay: number;
 		spread: number;
@@ -18,13 +18,13 @@ export function applyPuzzleEffect(
 		return console.error("Could not find image");
 	}
 
-	const { x, y, speed, delay, spread, easing } = options;
+	const { columns, rows, speed, delay, spread, easing } = options;
 
 	if (
-		x <= 0 ||
-		y <= 0 ||
-		x != Math.floor(x) ||
-		y != Math.floor(y)
+		columns <= 0 ||
+		rows <= 0 ||
+		columns != Math.floor(columns) ||
+		rows != Math.floor(rows)
 	) {
 		return console.error(
 			"Only positive integers are allowed for x,y"
@@ -35,10 +35,10 @@ export function applyPuzzleEffect(
 	img.style.opacity = "0";
 
 	const generatePieces = () => {
-		for (let j = 0; j < y; j++) {
-			for (let i = 0; i < x; i++) {
-				const correctX = (i / x) * img.width;
-				const correctY = (j / y) * img.height;
+		for (let y = 0; y < rows; y++) {
+			for (let x = 0; x < columns; x++) {
+				const correctX = (x / columns) * img.width;
+				const correctY = (y / rows) * img.height;
 				const randomX =
 					correctX + (2 * Math.random() - 1) * spread;
 				const randomY =
@@ -48,8 +48,8 @@ export function applyPuzzleEffect(
 				piece.classList.add("piece");
 
 				piece.style.position = "absolute";
-				piece.style.width = `${img.width / x}px`;
-				piece.style.height = `${img.height / y}px`;
+				piece.style.width = `${img.width / columns}px`;
+				piece.style.height = `${img.height / rows}px`;
 				piece.style.left = piece.style.top = "0px";
 				piece.style.opacity = "0";
 				piece.style.transform = `translate(${randomX}px,${randomY}px)`;
@@ -66,13 +66,13 @@ export function applyPuzzleEffect(
 				setTimeout(() => {
 					piece.style.opacity = "1";
 					piece.style.transform = `translate(${correctX}px,${correctY}px)`;
-				}, delay * (j * x + i));
+				}, delay * (y * columns + x));
 			}
 		}
 	};
 
 	const removePieces = () => {
-		const duration = delay * (y * x - 1) + speed + 100;
+		const duration = delay * (rows * columns - 1) + speed + 100;
 		setTimeout(() => {
 			img.style.opacity = "1";
 			container

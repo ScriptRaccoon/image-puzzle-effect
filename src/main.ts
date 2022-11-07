@@ -5,8 +5,8 @@ const imageContainer = document.getElementById(
 import { applyPuzzleEffect } from "./applyPuzzleEffect";
 
 applyPuzzleEffect(imageContainer, {
-	x: 8,
-	y: 6,
+	columns: 8,
+	rows: 6,
 	spread: 100,
 	speed: 600,
 	delay: 50,
