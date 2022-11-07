@@ -5,10 +5,10 @@ const imageContainer = document.getElementById(
 import { applyPuzzleEffect } from "./applyPuzzleEffect";
 
 applyPuzzleEffect(imageContainer, {
-	columns: 8,
-	rows: 6,
-	spread: 100,
-	speed: 600,
-	delay: 50,
+	columns: 10,
+	rows: 8,
+	spread: 200,
+	speed: 1000,
+	delay: 40,
 	easing: "cubic-bezier(.2,.37,.49,.98)",
 });
