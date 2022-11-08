@@ -27,7 +27,7 @@ export function applyPuzzleEffect(
 		rows != Math.floor(rows)
 	) {
 		return console.error(
-			"Only positive integers are allowed for x,y"
+			"Only positive integers are allowed for columns and rows"
 		);
 	}
 
@@ -57,11 +57,11 @@ export function applyPuzzleEffect(
 					`transform ${speed}ms ${easing},` +
 					`opacity ${speed}ms ${easing}`;
 
-				container.appendChild(piece);
-
 				piece.style.backgroundImage = `url(${img.src})`;
 				piece.style.backgroundPositionX = `-${correctX}px`;
 				piece.style.backgroundPositionY = `-${correctY}px`;
+
+				container.appendChild(piece);
 
 				setTimeout(() => {
 					piece.style.opacity = "1";
